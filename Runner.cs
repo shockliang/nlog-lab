@@ -1,3 +1,4 @@
+using System;
 using Microsoft.Extensions.Logging;
 
 namespace nlog_lab
@@ -13,7 +14,16 @@ namespace nlog_lab
 
         public void DoAction(string name)
         {
-            _logger.LogDebug(20, "Doing hard work! {Action}", name);
+            try
+            {
+                if (name.Contains("9"))
+                    throw new ArgumentException("Testing excepction");
+                _logger.LogDebug(20, "Doing hard work! {Action}", name);
+            }
+            catch (ArgumentException ex)
+            {
+                _logger.LogCritical(ex, ex.ToString());
+            }
         }
     }
 }
