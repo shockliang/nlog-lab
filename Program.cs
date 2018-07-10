@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using NLog.Extensions.Logging;
@@ -13,10 +14,14 @@ namespace nlog_lab
             var servicesProvider = BuildDi();
             var runner = servicesProvider.GetRequiredService<Runner>();
 
-            for (int i = 0; i < 10; i++)
+            Parallel.For(0, 10, (idx, state) =>
             {
-                runner.DoAction($"Action{i.ToString().PadLeft(2)}");
-            }
+                for (int i = 0; i < 10; i++)
+                {
+                    runner.DoAction($"Action{i.ToString().PadLeft(2)}");
+                }
+            });
+
 
             Console.WriteLine("Press ANY key to exit");
             Console.ReadLine();
