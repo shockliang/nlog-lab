@@ -16,7 +16,7 @@ namespace nlog_lab
 
             Parallel.For(0, 10, (idx, state) =>
             {
-                for (int i = 0; i < 10; i++)
+                for (int i = 0; i < 100; i++)
                 {
                     runner.DoAction($"Action{i.ToString().PadLeft(2)}");
                 }

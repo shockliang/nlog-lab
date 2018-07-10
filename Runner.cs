@@ -16,13 +16,13 @@ namespace nlog_lab
         {
             try
             {
-                if (name.Contains("9"))
+                if (name.EndsWith("9"))
                     throw new ArgumentException("Testing excepction");
                 _logger.LogDebug(20, "Doing hard work! {Action}", name);
             }
             catch (ArgumentException ex)
             {
-                _logger.LogCritical(ex, ex.ToString());
+                _logger.LogCritical(ex, $"{name} {ex.ToString()}");
             }
         }
     }
